@@ -1,6 +1,6 @@
 # Serviços de Turismo e Viagens - GUI
 
-Página estática desenvolvida para a Atividade Prática Final de Introdução ao HTML5.
+Página estática desenvolvida para a disciplina Ferramentas de Desenvolvimento Web.
 
 ## Recursos utilizados
 
