@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serviços de Turismo e Viagens - GUI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* ========== HEADER ========== */
+        header {
+            background: linear-gradient(135deg, #0077b6, #00b4d8);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        header h1 {
+            font-size: 2.4em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        /* ========== NAVEGACAO ========== */
+        nav {
+            background-color: #023e8a;
+            padding: 12px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 18px;
+            font-weight: bold;
+            font-size: 0.95em;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #90e0ef;
+        }
+
+        /* ========== SECOES ========== */
+        section {
+            max-width: 960px;
+            margin: 30px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+
+        section h2 {
+            color: #0077b6;
+            font-size: 1.6em;
+            margin-bottom: 18px;
+            border-bottom: 3px solid #00b4d8;
+            padding-bottom: 8px;
+        }
+
+        /* ========== GALERIA COM FIGURE / FIGCAPTION ========== */
+        .galeria {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        figure {
+            background: #edf6f9;
+            border-radius: 10px;
+            overflow: hidden;
+            width: 280px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        figure:hover {
+            transform: translateY(-5px);
+        }
+
+        figure img,
+        figure svg {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+
+        figcaption {
+            padding: 12px;
+            font-weight: bold;
+            color: #023e8a;
+        }
+
+        /* ========== VIDEO E AUDIO ========== */
+        .midia-container {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            align-items: center;
+        }
+
+        video, audio {
+            width: 100%;
+            max-width: 700px;
+            border-radius: 10px;
+        }
+
+        .midia-container p {
+            text-align: center;
+            color: #555;
+            font-style: italic;
+        }
+
+        /* ========== FORMULARIO ========== */
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .campo-total {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #023e8a;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #0077b6;
+            outline: none;
+        }
+
+        .range-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        input[type="range"] {
+            flex: 1;
+            padding: 0;
+        }
+
+        .range-valor {
+            font-weight: bold;
+            color: #0077b6;
+            min-width: 72px;
+            text-align: right;
+        }
+
+        button[type="submit"] {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #0077b6, #00b4d8);
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            opacity: 0.9;
+        }
+
+        /* ========== CANVAS ========== */
+        .canvas-wrapper {
+            text-align: center;
+        }
+
+        canvas {
+            border: 2px solid #0077b6;
+            border-radius: 10px;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .canvas-wrapper p {
+            margin-top: 10px;
+            color: #555;
+            font-style: italic;
+        }
+
+        /* ========== IFRAME ========== */
+        .iframe-wrapper {
+            text-align: center;
+        }
+
+        iframe {
+            width: 100%;
+            height: 400px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background-color: #023e8a;
+            color: white;
+            text-align: center;
+            padding: 24px;
+            margin-top: 40px;
+        }
+
+        footer p {
+            opacity: 0.8;
+            font-size: 0.9em;
+        }
+
+        /* ========== RESPONSIVO ========== */
+        @media (max-width: 600px) {
+            form {
+                grid-template-columns: 1fr;
+            }
+
+            .galeria {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav a {
+                display: block;
+                margin: 6px 0;
+            }
+
+            section {
+                margin: 20px 12px;
+                padding: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== CABECALHO ==================== -->
+    <header>
+        <h1>🌍 Serviços de Turismo e Viagens</h1>
+        <p>Descubra destinos incríveis e planeje sua viagem dos sonhos</p>
+    </header>
+
+    <!-- ==================== NAVEGACAO ==================== -->
+    <nav>
+        <a href="#destinos">Destinos</a>
+        <a href="#midia">Mídia</a>
+        <a href="#reserva">Reserva</a>
+        <a href="#canvas">Estatísticas</a>
+        <a href="#mapa">Mapa</a>
+    </nav>
+
+    <!-- ==================== SECAO 1: GALERIA DE DESTINOS (figure + figcaption) ==================== -->
+    <section id="destinos">
+        <h2>Nossos Destinos Populares</h2>
+        <div class="galeria">
+            <figure>
+                <!-- Imagem placeholder gerada via SVG inline -->
+                <svg width="280" height="180" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="280" height="180" fill="#00b4d8"/>
+                    <text x="140" y="85" text-anchor="middle" fill="white" font-size="20" font-family="sans-serif">🏖️ Praia</text>
+                    <text x="140" y="115" text-anchor="middle" fill="white" font-size="14" font-family="sans-serif">Rio de Janeiro</text>
+                </svg>
+                <figcaption>Rio de Janeiro - Cidade Maravilhosa</figcaption>
+            </figure>
+            <figure>
+                <svg width="280" height="180" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="280" height="180" fill="#2a9d8f"/>
+                    <text x="140" y="85" text-anchor="middle" fill="white" font-size="20" font-family="sans-serif">🌿 Natureza</text>
+                    <text x="140" y="115" text-anchor="middle" fill="white" font-size="14" font-family="sans-serif">Amazônia</text>
+                </svg>
+                <figcaption>Amazônia - Floresta Tropical</figcaption>
+            </figure>
+            <figure>
+                <svg width="280" height="180" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="280" height="180" fill="#e76f51"/>
+                    <text x="140" y="85" text-anchor="middle" fill="white" font-size="20" font-family="sans-serif">🏛️ Cultura</text>
+                    <text x="140" y="115" text-anchor="middle" fill="white" font-size="14" font-family="sans-serif">Salvador</text>
+                </svg>
+                <figcaption>Salvador - Patrimônio Histórico</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <!-- ==================== SECAO 2: VIDEO E AUDIO NATIVOS ==================== -->
+    <section id="midia">
+        <h2>Conheça Nossos Destinos</h2>
+        <div class="midia-container">
+            <!-- Video HTML5 nativo (sem plugins) -->
+            <video controls poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='700' height='400'%3E%3Crect fill='%23023e8a' width='700' height='400'/%3E%3Ctext x='350' y='200' text-anchor='middle' fill='white' font-size='24' font-family='sans-serif'%3E%E2%96%B6 Clique para reproduzir%3C/text%3E%3C/svg%3E">
+                <source src="video-destinos.mp4" type="video/mp4">
+                <source src="video-destinos.webm" type="video/webm">
+                Seu navegador não suporta o elemento de vídeo HTML5.
+            </video>
+            <p>Vídeo institucional sobre nossos destinos turísticos</p>
+
+            <!-- Audio HTML5 nativo -->
+            <audio controls>
+                <source src="audio-ambiente.mp3" type="audio/mpeg">
+                <source src="audio-ambiente.ogg" type="audio/ogg">
+                Seu navegador não suporta o elemento de áudio HTML5.
+            </audio>
+            <p>Música ambiente relaxante para inspirar sua próxima viagem</p>
+        </div>
+    </section>
+
+    <!-- ==================== SECAO 3: FORMULARIO COM TIPOS MODERNOS ==================== -->
+    <section id="reserva">
+        <h2>Solicite um Orçamento</h2>
+        <form action="#" method="post" id="formReserva">
+
+            <!-- input type="text" -->
+            <div>
+                <label for="nome">Nome Completo:</label>
+                <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required>
+            </div>
+
+            <!-- input type="email" -->
+            <div>
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+            </div>
+
+            <!-- input type="tel" -->
+            <div>
+                <label for="telefone">Telefone:</label>
+                <input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-9999" pattern="\([0-9]{2}\)\s?[0-9]{4,5}-[0-9]{4}">
+            </div>
+
+            <!-- input type="date" -->
+            <div>
+                <label for="data-ida">Data de Ida:</label>
+                <input type="date" id="data-ida" name="data-ida" required>
+            </div>
+
+            <!-- input type="date" -->
+            <div>
+                <label for="data-volta">Data de Volta:</label>
+                <input type="date" id="data-volta" name="data-volta" required>
+            </div>
+
+            <!-- input type="number" -->
+            <div>
+                <label for="passageiros">Número de Passageiros:</label>
+                <input type="number" id="passageiros" name="passageiros" min="1" max="20" value="1" required>
+            </div>
+
+            <!-- select -->
+            <div>
+                <label for="destino">Destino Desejado:</label>
+                <select id="destino" name="destino" required>
+                    <option value="">Selecione um destino</option>
+                    <option value="Rio de Janeiro">Rio de Janeiro</option>
+                    <option value="Amazônia">Amazônia</option>
+                    <option value="Salvador">Salvador</option>
+                    <option value="Foz do Iguaçu">Foz do Iguaçu</option>
+                    <option value="Fernando de Noronha">Fernando de Noronha</option>
+                </select>
+            </div>
+
+            <!-- input type="range" -->
+            <div>
+                <label for="orcamento">Orçamento Estimado (R$):</label>
+                <div class="range-container">
+                    <input type="range" id="orcamento" name="orcamento" min="1000" max="30000" step="500" value="5000" oninput="document.getElementById('valorOrcamento').textContent = 'R$ ' + Number(this.value).toLocaleString('pt-BR')">
+                    <span class="range-valor" id="valorOrcamento">R$ 5.000</span>
+                </div>
+            </div>
+
+            <!-- textarea -->
+            <div class="campo-total">
+                <label for="observacoes">Observações:</label>
+                <textarea id="observacoes" name="observacoes" rows="4" placeholder="Conte-nos mais sobre a viagem que você deseja..."></textarea>
+            </div>
+
+            <!-- botao submit -->
+            <button type="submit">Solicitar Orçamento</button>
+        </form>
+    </section>
+
+    <!-- ==================== SECAO 4: CANVAS - GRAFICO INTERATIVO ==================== -->
+    <section id="canvas">
+        <h2>Destinos Mais Procurados</h2>
+        <div class="canvas-wrapper">
+            <canvas id="grafico" width="700" height="350"></canvas>
+            <p>Gráfico de barras gerado com o elemento &lt;canvas&gt; do HTML5</p>
+        </div>
+    </section>
+
+    <!-- ==================== SECAO 5: IFRAME - MAPA INCORPORADO ==================== -->
+    <section id="mapa">
+        <h2>Nossa Localização</h2>
+        <div class="iframe-wrapper">
+            <iframe
+                src="https://www.openstreetmap.org/export/embed.html?bbox=-43.2096,-22.9135,-43.1696,-22.8935&layer=mapnik"
+                allowfullscreen
+                loading="lazy"
+                title="Mapa da localização da agência">
+            </iframe>
+            <p style="margin-top: 10px; color: #555; font-style: italic;">
+                Localização incorporada usando &lt;iframe&gt; - recurso do HTML5
+            </p>
+        </div>
+    </section>
+
+    <!-- ==================== RODAPE ==================== -->
+    <footer>
+        <p>&copy; 2025 Serviços de Turismo e Viagens - GUI | Todos os direitos reservados</p>
+        <p>Atividade Prática Final - Introdução ao HTML5</p>
+    </footer>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script>
+        // ===== GRAFICO DE BARRAS COM CANVAS =====
+        const canvas = document.getElementById('grafico');
+        const ctx = canvas.getContext('2d');
+
+        const destinos = ['Rio de Janeiro', 'Amazônia', 'Salvador', 'Foz do Iguaçu', 'Noronha'];
+        const valores = [85, 60, 72, 55, 90];
+        const cores = ['#0077b6', '#00b4d8', '#2a9d8f', '#e9c46a', '#e76f51'];
+
+        const larguraBarra = 80;
+        const espacamento = 60;
+        const inicioX = 60;
+        const alturaMax = 250;
+        const baseY = 310;
+
+        // Titulo do grafico
+        ctx.fillStyle = '#023e8a';
+        ctx.font = 'bold 16px Segoe UI, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('Popularidade dos Destinos (%)', canvas.width / 2, 25);
+
+        // Linhas de grade horizontais
+        ctx.strokeStyle = '#e0e0e0';
+        ctx.lineWidth = 1;
+        for (let i = 0; i <= 100; i += 25) {
+            const y = baseY - (i / 100) * alturaMax;
+            ctx.beginPath();
+            ctx.moveTo(40, y);
+            ctx.lineTo(canvas.width - 20, y);
+            ctx.stroke();
+
+            // Rotulos do eixo Y
+            ctx.fillStyle = '#888';
+            ctx.font = '12px Segoe UI, sans-serif';
+            ctx.textAlign = 'right';
+            ctx.fillText(i + '%', 35, y + 4);
+        }
+
+        // Barras
+        for (let i = 0; i < destinos.length; i++) {
+            const x = inicioX + i * (larguraBarra + espacamento);
+            const alturaBarra = (valores[i] / 100) * alturaMax;
+
+            // Sombra
+            ctx.fillStyle = 'rgba(0,0,0,0.1)';
+            ctx.fillRect(x + 3, baseY - alturaBarra + 3, larguraBarra, alturaBarra);
+
+            // Barra
+            ctx.fillStyle = cores[i];
+            ctx.fillRect(x, baseY - alturaBarra, larguraBarra, alturaBarra);
+
+            // Valor sobre a barra
+            ctx.fillStyle = '#333';
+            ctx.font = 'bold 14px Segoe UI, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText(valores[i] + '%', x + larguraBarra / 2, baseY - alturaBarra - 8);
+
+            // Nome do destino
+            ctx.fillStyle = '#555';
+            ctx.font = '11px Segoe UI, sans-serif';
+            ctx.fillText(destinos[i], x + larguraBarra / 2, baseY + 18);
+        }
+
+        // ===== VALIDACAO DO FORMULARIO =====
+        document.getElementById('formReserva').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nome = document.getElementById('nome').value;
+            const destino = document.getElementById('destino').value;
+            const dataIda = document.getElementById('data-ida').value;
+            alert('Obrigado, ' + nome + '! Sua solicitação para ' + destino + ' em ' + dataIda + ' foi enviada com sucesso!');
+        });
+    </script>
+
+</body>
+</html>
